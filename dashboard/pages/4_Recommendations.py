@@ -261,48 +261,31 @@ with tab1:
     st.markdown("### 🔍 Chọn Khách hàng để phân tích chân dung & nhận gợi ý")
     
     samples = fetch_sample_customers()
-    sample_options = {s["label"]: s["id"] for s in samples}
-
-    # Đồng bộ thông minh giữa Selectbox và Ô nhập tự do
-    if "active_cust_id" not in st.session_state:
-        st.session_state.active_cust_id = list(sample_options.values())[0]
-
-    def on_select_change():
-        chosen_id = sample_options[st.session_state.sb_sample]
-        st.session_state.active_cust_id = chosen_id
-        st.session_state.ti_custom = ""  # Xóa ô nhập để không bị đè
-
-    def on_custom_change():
-        val = st.session_state.ti_custom.strip().upper()
-        if val:
-            st.session_state.active_cust_id = val
+    CUSTOM_OPTION = "✍️ Tùy chọn: Nhập mã Customer ID khác..."
+    
+    options = [s["label"] for s in samples] + [CUSTOM_OPTION]
+    sample_map = {s["label"]: s["id"] for s in samples}
 
     col_select, col_custom = st.columns([3, 1])
     with col_select:
-        # Tìm index tương ứng nếu có trong danh sách
-        current_labels = list(sample_options.keys())
-        current_idx = 0
-        for idx, lbl in enumerate(current_labels):
-            if sample_options[lbl] == st.session_state.active_cust_id:
-                current_idx = idx
-                break
-
-        st.selectbox(
+        selected_option = st.selectbox(
             "Chọn hồ sơ khách hàng mẫu đại diện:",
-            options=current_labels,
-            index=current_idx,
-            key="sb_sample",
-            on_change=on_select_change
+            options=options,
+            index=0
         )
-    with col_custom:
-        st.text_input(
-            "Hoặc nhập Customer ID bất kỳ:",
-            key="ti_custom",
-            placeholder="VD: C00010...",
-            on_change=on_custom_change
-        )
-
-    selected_cust_id = st.session_state.active_cust_id
+    
+    if selected_option == CUSTOM_OPTION:
+        with col_custom:
+            custom_id = st.text_input(
+                "Nhập Customer ID bất kỳ:",
+                value="C00010",
+                placeholder="VD: C00010..."
+            )
+            selected_cust_id = custom_id.strip().upper() if custom_id.strip() else "C00005"
+    else:
+        selected_cust_id = sample_map[selected_option]
+        with col_custom:
+            st.info(f"Đang chọn: **#{selected_cust_id}**")
 
     rec_data = fetch_customer_recommendations(selected_cust_id, limit=6)
     profile = rec_data.get("customer_profile", {})

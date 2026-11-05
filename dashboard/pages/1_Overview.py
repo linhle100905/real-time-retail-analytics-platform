@@ -64,18 +64,19 @@ st.caption("Tổng quan hiệu suất bán lẻ và khách hàng (2020 - 2026)."
 import requests
 
 try:
-    response = requests.get("http://127.0.0.1:8000/api/analytics/summary")
+    response = requests.get("http://127.0.0.1:8000/api/analytics/summary", timeout=2)
     if response.status_code == 200:
         api_data = response.json()
         total_orders = api_data.get("total_orders", len(orders_df))
         total_revenue = api_data.get("total_revenue", orders_df["total_amount_usd"].sum())
         total_customers = api_data.get("total_customers", len(customers_df))
-        # API chưa có churn rate nên vẫn tính bằng df tạm thời
         churn_rate = (customers_df["churned"] == 1).mean() * 100
     else:
-        raise Exception("API failed")
-except Exception as e:
-    st.warning(f"Không thể kết nối FastAPI, đang dùng Pandas. Lỗi: {e}")
+        total_orders = len(orders_df)
+        total_revenue = orders_df["total_amount_usd"].sum()
+        total_customers = len(customers_df)
+        churn_rate = (customers_df["churned"] == 1).mean() * 100
+except Exception:
     total_orders = len(orders_df)
     total_revenue = orders_df["total_amount_usd"].sum()
     total_customers = len(customers_df)
