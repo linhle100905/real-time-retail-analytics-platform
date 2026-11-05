@@ -1,0 +1,38 @@
+# Environment & Virtual Env
+.venv/
+venv/
+ENV/
+.env
+*.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Office / Word Temp Lock Files
+~$*.docx
+~$*.doc
+~$*.pptx
+~$*.xlsx
+
+# Dataset & Large Files
+data/raw/
+data/processed/
+data/sample/*.csv
+
+# Trained ML Models & Weights
+models/
+*.pkl
+*.joblib
+*.pt
+*.onnx
+
+# Logs & Runtime
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

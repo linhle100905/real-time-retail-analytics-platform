@@ -1,0 +1,14 @@
+﻿metric,value
+rows_before,500000
+rows_after,499059
+rows_removed,941
+duplicates_before,288
+duplicates_after,0
+null_brand_before,71851
+null_brand_after,0
+null_category_before,158439
+null_category_after,0
+null_session_before,0
+invalid_event_time,0
+invalid_event_type,0
+invalid_price,653

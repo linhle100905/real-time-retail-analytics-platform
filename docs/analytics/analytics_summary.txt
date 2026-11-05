@@ -1,0 +1,13 @@
+RETAIL ANALYTICS SUMMARY
+==================================================
+Total events: 499,059
+Views: 481,137
+Carts: 8,165
+Remove from cart: 0
+Purchases: 9,757
+Unique users: 89,072
+Unique products: 46,636
+Unique sessions: 117,367
+Purchase value proxy: 3,115,433.59
+Event conversion: 2.03%
+Session conversion: 7.04%

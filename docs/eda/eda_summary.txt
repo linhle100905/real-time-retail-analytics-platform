@@ -1,0 +1,6 @@
+EDA SUMMARY
+==================================================
+Total Orders: 25,000
+Total Customers: 8,000
+Total Revenue: $3,136,404.66
+Churn Rate: 8.94%

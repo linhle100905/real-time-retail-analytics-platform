@@ -1,0 +1,7 @@
+DATA CLEANING SUMMARY
+==================================================
+Orders before: 25,000
+Orders after: 25,000
+Customers before: 8,000
+Customers after: 8,000
+Missing ratings in orders: 0
