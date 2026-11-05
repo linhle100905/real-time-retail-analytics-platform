@@ -96,8 +96,8 @@ for index, row in df.iterrows():
           f"Sản phẩm: {event['product_name'][:20]}... | "
           f"Giá: ${event['subtotal_usd']}")
     
-    # Nghỉ 20 giây để giả lập real-time (20 giây / 1 đơn hàng demo)
-    time.sleep(20)
+    # Nghỉ 1.5 giây giữa mỗi đơn hàng để demo trực quan real-time mượt mà
+    time.sleep(1.5)
 
 print("🎉 Đã hoàn thành gửi toàn bộ dữ liệu!")
 producer.close()
